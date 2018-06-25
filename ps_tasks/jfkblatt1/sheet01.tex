@@ -1,0 +1,112 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+
+\lstdefinestyle{custom}{
+  basicstyle=\footnotesize\ttfamily,
+  backgroundcolor=\color{white},
+  keywordstyle=\color{magenta},
+  commentstyle=\color{black},
+  stringstyle=\color{cyan},
+  numbers=left,
+  numbersep=.5em,
+  breakatwhitespace=false,
+  breaklines=true,
+  showstringspaces=false,
+  keepspaces=true,
+  showspaces=false,
+  showtabs=false,
+  tabsize=2
+}
+\lstset{style=custom}
+
+\title{Excercise Sheet 2}
+\author{Johannes Koch}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed
+
+\begin{document}
+\maketitle
+
+\section{Task 1}
+
+\subsection{Script 1}
+
+\lstinputlisting[language=bash]{script1.sh}
+Line 1: tell the shell to use \texttt{/bin/bash} as interpreter\\
+Line 2-3: comments\\
+Line 4-5, 7: for loop, executes Line 6 for every given commandline argument\\
+Line 6: change the access permissions for the current argument to \texttt{-rwxr-x--- ...}\\
+\\
+Execution with filenames or directories as commandline arguments:\\
+The script will change the access permissions for each valid argument or throw an error to stdout.\\
+\\
+Execution without any arguments:\\
+Since the for-loop will never execute the script will do nothing.\\
+\pagebreak
+\subsection{Script 2}
+
+\lstinputlisting[language=bash]{script2.sh}
+Line 1: tell the shell to use \texttt{/bin/bash} as interpreter\\
+Line 2: comment\\
+Line 3-4: if the number of commandline arguments is less than 3, execute Lines 5-7\\
+Line 5: print the string \texttt{"Error. ..."} to \texttt{stderr} while
+interpreting escape characters\\
+Line 6: same as Line 5 with other text
+Line 7: exit with \href{http://www.tldp.org/LDP/abs/html/exitcodes.html}{error code 1
+ (Catchall for general errors)}\\
+Line 8-9: if the number of commandline arguments is greater than 3, execute Lines 10-12\\
+Line 10-11: same as Line 5 with other error message\\\
+Line 12: exit with \href{http://www.tldp.org/LDP/abs/html/exitcodes.html}{error
+ code 2 (Misuse of shell builtins(according to Bash documentation))}\\
+Line 13: if none of the above cases occur, execute Line 14\\
+Line 14: prints "Argument count correct. Proceeding..." and a newline to \texttt{stdout}\\
+Line 15: end the if clause\\
+\\
+Execution with less than 3 commandline arguments:\\
+Lines 5-6 will be printed to \texttt{stderr} and the program will exit with error code 1\\
+\\
+Execution with more than 3 commandline arguments:\\
+Lines 10-11 will be printed to \texttt{stderr} and the program will exit with error code 2\\
+\\
+Execution with 3 commandline arguments:\\
+"Argument count correct. Proceeding..." and a newline command will be printed to \texttt{stdout}\\
+\pagebreak
+\subsection{Script 3}
+
+\lstinputlisting[language=bash]{script3.sh}
+Line 1: tell the shell to use \texttt{/bin/bash} as interpreter\\
+Line 2: comment\\
+Line 3: \texttt{INFILE} is now the first commandline argument\\
+Line 4: \texttt{OUTFILE} is now the second commandline argument\\
+Line 5-6: if the file \texttt{INFILE} exists execute Lines 7-12\\
+Line 7-8: if the \texttt{OUTFILE} is a writeable file, execute Line 9\\
+Line 9: append the content of \texttt{INFILE} to \texttt{OUTFILE}\\
+Line 10: if \texttt{OUTFILE} is not a writeable file, execute Line 11\\
+Line 11: print "can not write to " and the second argument to \texttt{stdout}\\
+Line 12: end the inner if clause\\
+Line 13: if \texttt{INFILE} does not exist, execute Line 14\\
+Line 14: prints "can not read from" and the first argument to \texttt{stdout}\\
+Line 15: end the outer if clause\\
+\\
+Execution with at least 2 arguments, where the first one is an existing file
+ and the second a writeable file:\\
+The content of the first file will be appended to the second file\\
+\\
+Execution with at least 1 argument, where the first one is an existing file:\\
+"can not write to " and the second argument or "" will be printed to \texttt{stdout}\\
+\\
+Execution with any number of arguments, where the first one doesn't exist:\\
+"can not read from " and the first argument or "" will be printed to \texttt{stdout}\\
+\pagebreak
+
+\section{Task 2}
+\lstinputlisting[language=bash]{my_back_up.sh}
+\end{document}

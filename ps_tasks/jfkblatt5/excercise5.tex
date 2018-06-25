@@ -1,0 +1,68 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+
+\lstdefinestyle{custom}{
+  basicstyle=\footnotesize\ttfamily,
+  backgroundcolor=\color{White},
+  keywordstyle=\color{Cerulean},
+  commentstyle=\color{Gray},
+  stringstyle=\color{OliveGreen},
+  %numbers=left,
+  %numbersep=.5em,
+  breakatwhitespace=false,
+  breaklines=true,
+  showstringspaces=false,
+  keepspaces=true,
+  showspaces=false,
+  showtabs=false,
+  tabsize=2
+}
+\lstset{style=custom}
+
+\title{Excercise Sheet 4}
+\author{Johannes Koch}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed
+
+\begin{document}
+\maketitle
+
+\section{Task 1}
+
+Compile \texttt{reader.c} and \texttt{task1.c}:\\
+\texttt{gcc -Wall -Werror -std=c99 reader.c -o reader}\\
+\texttt{gcc -Wall -Werror -std=c99 task1.c -o task1}\\
+and call:\\
+\texttt{./reader \& ./task1} or each of the binarys in a separate console window.
+
+\subsection{\texttt{reader.c}}
+\lstinputlisting[language=C]{reader.c}
+
+\subsection{\texttt{task1.c}}
+\lstinputlisting[language=C]{task1.c}
+
+\clearpage
+
+\section{Task 2}
+Task 2 uses the reader of task 1, \texttt{task2a.c} and \texttt{task2b.c}
+both need the additional \texttt{-pthread} compile flag. To execute the program,
+call \texttt{./reader \& ./task2a}/\texttt{./reader \& ./task2b} or each of the binarys
+in a separate console window.\\
+The semaphores in \texttt{task2a} seem to be very unreliable(no idea what was done wrong),
+thats why \texttt{task2b} exists.
+
+\subsection{\texttt{task2a.c}}
+\lstinputlisting[language=C]{task2a.c}
+
+\subsection{\texttt{task2b.c}}
+\lstinputlisting[language=C]{task2b.c}
+
+\end{document}

@@ -1,0 +1,394 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+
+% Table stuff
+\usepackage{array}
+\setlength{\arrayrulewidth}{.8mm}
+\renewcommand{\arraystretch}{1.5}
+
+%Gantt stuff
+\usepackage[dvipsnames]{xcolor}
+\usepackage{pgfgantt}
+
+\title{Exercise Sheet 2}
+\author{Johannes Koch}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed
+
+\begin{document}
+\maketitle
+
+\section{Definitions}
+
+\subsection{Turnaround time}
+Average time a process needs from arriving to finishing.
+
+\subsection{Response time}
+Average time a process has to wait for its first CPU time.
+
+\subsection{Troughput}
+Average number of processes per second.
+
+\section{Processes}
+
+\begin{center}
+  \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+    \hline
+    \textbf{Process} & \textbf{Arrival Time} & \textbf{Service Time} & \textbf{Priority}\\
+    \hline
+    A & 0 & 3 & 1\\
+    B & 2 & 6 & 1\\
+    C & 4 & 4 & 2\\
+    D & 6 & 5 & 2\\
+    E & 8 & 2 & 3\\
+    \hline
+  \end{tabular}
+\end{center}
+
+\section{FCFS(First Come First Serve)}
+
+\begin{center}
+  \begin{ganttchart}[vgrid,
+                     hgrid,
+                     title height=1,
+                     y unit title=.5cm,
+                     y unit chart=0.5cm,
+                     bar height=1,
+                     bar top shift=0,
+                     bar/.style={fill=Cerulean},
+                     bar incomplete/.style={fill=YellowOrange!80},
+                     progress label text={},
+                    ]{1}{20}
+
+  %labels
+  \gantttitle{\textbf{FCFS (First Come First Serve)}}{20}\\
+  \gantttitle{CPU Time}{10}
+  \ganttbar{}{10}{10}
+  \gantttitle{Waiting}{10}
+  \ganttbar[progress=0]{}{20}{20}\\
+  \gantttitlelist{0,...,19}{1}\\
+
+  %tasks
+  \ganttbar{A}{1}{3}\\
+
+  \ganttbar[progress=0]{B}{3}{3}
+  \ganttbar{}{4}{9}\\
+
+  \ganttbar[progress=0]{C}{5}{9}
+  \ganttbar{}{10}{13}\\
+
+  \ganttbar[progress=0]{D}{7}{13}
+  \ganttbar{}{14}{18}\\
+
+  \ganttbar[progress=0]{E}{9}{18}
+  \ganttbar{}{19}{20}\\
+
+  \gantttitle{Throughput: $5jobs/20sec = 1/4job/sec$}{20}\\
+  \gantttitle{Response time: $23sec/5jobs = 4.6sec/job$}{20}\\
+  \gantttitle{Turnaround time: $43sec/5jobs = 8.6sec/job$}{20}
+  \end{ganttchart}
+\end{center}
+
+\section{SPN (Shortest Process Next)}
+
+\begin{center}
+  \begin{ganttchart}[vgrid,
+                     hgrid,
+                     title height=1,
+                     y unit title=.5cm,
+                     y unit chart=0.5cm,
+                     bar height=1,
+                     bar top shift=0,
+                     bar/.style={fill=Cerulean},
+                     bar incomplete/.style={fill=YellowOrange!80},
+                     progress label text={},
+                    ]{1}{20}
+
+  %labels
+  \gantttitle{\textbf{SPN (Shortest Process Next)}}{20}\\
+  \gantttitle{CPU Time}{10}
+  \ganttbar{}{10}{10}
+  \gantttitle{Waiting}{10}
+  \ganttbar[progress=0]{}{20}{20}\\
+  \gantttitlelist{0,...,19}{1}\\
+
+  %tasks
+  \ganttbar{A}{1}{3}\\
+
+  \ganttbar[progress=0]{B}{3}{3}
+  \ganttbar{}{4}{9}\\
+
+  \ganttbar[progress=0]{C}{5}{11}
+  \ganttbar{}{12}{15}\\
+
+  \ganttbar[progress=0]{D}{7}{15}
+  \ganttbar{}{16}{20}\\
+
+  \ganttbar[progress=0]{E}{9}{9}
+  \ganttbar{}{10}{11}\\
+
+  \gantttitle{Throughput: $5jobs/20sec = 1/4job/sec$}{20}\\
+  \gantttitle{Response time: $18sec/5jobs = 3.6sec/job$}{20}\\
+  \gantttitle{Turnaround time: $38sec/5jobs = 7.6sec/job$}{20}
+  \end{ganttchart}
+\end{center}
+
+\section{SRT (Shortest Remaining Time Next)}
+
+\begin{center}
+  \begin{ganttchart}[vgrid,
+                     hgrid,
+                     title height=1,
+                     y unit title=.5cm,
+                     y unit chart=0.5cm,
+                     bar height=1,
+                     bar top shift=0,
+                     bar/.style={fill=Cerulean},
+                     bar incomplete/.style={fill=YellowOrange!80},
+                     progress label text={},
+                    ]{1}{20}
+
+  %labels
+  \gantttitle{\textbf{SRT (Shortest Remaining Time Next)}}{20}\\
+  \gantttitle{CPU Time}{10}
+  \ganttbar{}{10}{10}
+  \gantttitle{Waiting}{10}
+  \ganttbar[progress=0]{}{20}{20}\\
+  \gantttitlelist{1,...,20}{1}\\
+
+  %tasks
+  \ganttbar{A}{1}{3}\\
+
+  \ganttbar[progress=0]{B}{3}{3}
+  \ganttbar{}{4}{4}
+  \ganttbar[progress=0]{}{5}{10}
+  \ganttbar{}{11}{15}\\
+
+  \ganttbar{C}{5}{8}\\
+
+  \ganttbar[progress=0]{D}{7}{15}
+  \ganttbar{}{16}{20}\\
+
+  \ganttbar{E}{9}{10}\\
+
+  \gantttitle{Throughput: $5jobs/20sec = 1/4job/sec$}{20}\\
+  \gantttitle{Response time: $10sec/5jobs = 2sec/job$}{20}\\
+  \gantttitle{Turnaround time: $36sec/5jobs = 7.2sec/job$}{20}
+  \end{ganttchart}
+\end{center}
+
+\section{Round Robin (quantum = 1)}
+
+\begin{center}
+  \begin{ganttchart}[vgrid,
+                     hgrid,
+                     title height=1,
+                     y unit title=.5cm,
+                     y unit chart=0.5cm,
+                     bar height=1,
+                     bar top shift=0,
+                     bar/.style={fill=Cerulean},
+                     bar incomplete/.style={fill=YellowOrange!80},
+                     progress label text={},
+                    ]{1}{20}
+
+  %labels
+  \gantttitle{\textbf{Round Robin (quantum = 1)}}{20}\\
+  \gantttitle{CPU Time}{10}
+  \ganttbar{}{10}{10}
+  \gantttitle{Waiting}{10}
+  \ganttbar[progress=0]{}{20}{20}\\
+  \gantttitlelist{1,...,20}{1}\\
+
+  %tasks
+  \ganttbar{A}{1}{2}
+  \ganttbar[progress=0]{}{3}{3}
+  \ganttbar{}{4}{4}\\
+
+  \ganttbar{B}{3}{3}
+  \ganttbar[progress=0]{}{4}{4}
+  \ganttbar{}{5}{5}
+  \ganttbar[progress=0]{}{6}{6}
+  \ganttbar{}{7}{7}
+  \ganttbar[progress=0]{}{8}{9}
+  \ganttbar{}{10}{10}
+  \ganttbar[progress=0]{}{11}{13}
+  \ganttbar{}{14}{14}
+  \ganttbar[progress=0]{}{15}{17}
+  \ganttbar{}{18}{18}\\
+
+  \ganttbar[progress=0]{C}{5}{5}
+  \ganttbar{}{6}{6}
+  \ganttbar[progress=0]{}{7}{8}
+  \ganttbar{}{9}{9}
+  \ganttbar[progress=0]{}{10}{12}
+  \ganttbar{}{13}{13}
+  \ganttbar[progress=0]{}{14}{16}
+  \ganttbar{}{17}{17}\\
+
+  \ganttbar[progress=0]{D}{7}{7}
+  \ganttbar{}{8}{8}
+  \ganttbar[progress=0]{}{9}{11}
+  \ganttbar{}{12}{12}
+  \ganttbar[progress=0]{}{13}{15}
+  \ganttbar{}{16}{16}
+  \ganttbar[progress=0]{}{17}{18}
+  \ganttbar{}{19}{20}\\
+
+  \ganttbar[progress=0]{E}{9}{10}
+  \ganttbar{}{11}{11}
+  \ganttbar[progress=0]{}{12}{14}
+  \ganttbar{}{15}{15}\\
+
+  \gantttitle{Throughput: $5jobs/20sec = 1/4job/sec$}{20}\\
+  \gantttitle{Response time: $4sec/5jobs = 0.8sec/job$}{20}\\
+  \gantttitle{Turnaround time: $54sec/5jobs = 10.8sec/job$}{20}
+  \end{ganttchart}
+\end{center}
+
+\section{Round Robin (quantum = 4)}
+
+\begin{center}
+  \begin{ganttchart}[vgrid,
+                     hgrid,
+                     title height=1,
+                     y unit title=.5cm,
+                     y unit chart=0.5cm,
+                     bar height=1,
+                     bar top shift=0,
+                     bar/.style={fill=Cerulean},
+                     bar incomplete/.style={fill=YellowOrange!80},
+                     progress label text={},
+                    ]{1}{20}
+
+  %labels
+  \gantttitle{\textbf{Round Robin (quantum = 4)}}{20}\\
+  \gantttitle{CPU Time}{10}
+  \ganttbar{}{10}{10}
+  \gantttitle{Waiting}{10}
+  \ganttbar[progress=0]{}{20}{20}\\
+  \gantttitlelist{1,...,20}{1}\\
+
+  %tasks
+  \ganttbar{A}{1}{3}\\
+
+  \ganttbar[progress=0]{B}{3}{3}
+  \ganttbar{}{4}{7}
+  \ganttbar[progress=0]{}{8}{15}
+  \ganttbar{}{16}{17}\\
+
+  \ganttbar[progress=0]{C}{5}{7}
+  \ganttbar{}{8}{11}\\
+
+  \ganttbar[progress=0]{D}{7}{11}
+  \ganttbar{}{12}{15}
+  \ganttbar[progress=0]{}{16}{19}
+  \ganttbar{}{20}{20}\\
+
+  \ganttbar[progress=0]{E}{9}{17}
+  \ganttbar{}{18}{19}\\
+
+  \gantttitle{Throughput: $5jobs/20sec = 1/4job/sec$}{20}\\
+  \gantttitle{Response time: $18sec/5jobs = 3.6sec/job$}{20}\\
+  \gantttitle{Turnaround time: $50sec/5jobs = 10sec/job$}{20}
+  \end{ganttchart}
+\end{center}
+
+\section{Highest Priority First with preemption}
+\textbf{Note:} Contradictary to Unix/BSD it is assumed that higher number equals higher priority.
+
+\begin{center}
+  \begin{ganttchart}[vgrid,
+                     hgrid,
+                     title height=1,
+                     y unit title=.5cm,
+                     y unit chart=0.5cm,
+                     bar height=1,
+                     bar top shift=0,
+                     bar/.style={fill=Cerulean},
+                     bar incomplete/.style={fill=YellowOrange!80},
+                     progress label text={},
+                    ]{1}{20}
+
+  %labels
+  \gantttitle{\textbf{Highest Priority First with preemption}}{20}\\
+  \gantttitle{CPU Time}{10}
+  \ganttbar{}{10}{10}
+  \gantttitle{Waiting}{10}
+  \ganttbar[progress=0]{}{20}{20}\\
+  \gantttitlelist{1,...,20}{1}\\
+
+  %tasks
+  \ganttbar{A (1)}{1}{3}\\
+
+  \ganttbar[progress=0]{B (1)}{3}{3}
+  \ganttbar{}{4}{4}
+  \ganttbar[progress=0]{}{5}{15}
+  \ganttbar{}{16}{20}\\
+
+  \ganttbar{C (2)}{5}{8}\\
+
+  \ganttbar[progress=0]{D (2)}{7}{10}
+  \ganttbar{}{11}{15}\\
+
+  \ganttbar{E (3)}{9}{10}\\
+
+  \gantttitle{Throughput: $5jobs/20sec = 1/4job/sec$}{20}\\
+  \gantttitle{Response time: $5sec/5jobs = 1sec/job$}{20}\\
+  \gantttitle{Turnaround time: $36sec/5jobs = 7.2sec/job$}{20}
+  \end{ganttchart}
+\end{center}
+
+\clearpage
+
+\section{Highest Priority First without preemption}
+\textbf{Note:} Contradictary to Unix/BSD it is assumed that higher number equals higher priority.
+
+\begin{center}
+  \begin{ganttchart}[vgrid,
+                     hgrid,
+                     title height=1,
+                     y unit title=.5cm,
+                     y unit chart=0.5cm,
+                     bar height=1,
+                     bar top shift=0,
+                     bar/.style={fill=Cerulean},
+                     bar incomplete/.style={fill=YellowOrange!80},
+                     progress label text={},
+                    ]{1}{20}
+
+  %labels
+  \gantttitle{\textbf{Highest Priority First without preemption}}{20}\\
+  \gantttitle{CPU Time}{10}
+  \ganttbar{}{10}{10}
+  \gantttitle{Waiting}{10}
+  \ganttbar[progress=0]{}{20}{20}\\
+  \gantttitlelist{1,...,20}{1}\\
+
+  %tasks
+  \ganttbar{A (1)}{1}{3}\\
+
+  \ganttbar[progress=0]{B (1)}{3}{3}
+  \ganttbar{}{4}{9}\\
+
+  \ganttbar[progress=0]{C (2)}{5}{11}
+  \ganttbar{}{12}{15}\\
+
+  \ganttbar[progress=0]{D (2)}{7}{15}
+  \ganttbar{}{16}{20}\\
+
+  \ganttbar[progress=0]{E (2)}{9}{9}
+  \ganttbar{}{10}{11}\\
+
+  \gantttitle{Throughput: $5jobs/20sec = 1/4job/sec$}{20}\\
+  \gantttitle{Response time: $18sec/5jobs = 3.6sec/job$}{20}\\
+  \gantttitle{Turnaround time: $38sec/5jobs = 7.6sec/job$}{20}
+  \end{ganttchart}
+\end{center}
+
+\end{document}
